@@ -10,7 +10,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Illuminate\Support\Facades\Http;
 
 class Controller extends BaseController
 {
@@ -23,12 +22,7 @@ class Controller extends BaseController
 
     public function dashboardPage()
     {
-        $tasks =  Http::withHeaders([
-            'Authorization' => 'Bearer ' . auth()->user()->token,
-        ])->get(env('API_BASE_URL').'/task-get/'.auth()->user()->uuid);
-
-        return view('pages.dashboard')
-            ->with('tasks', json_decode($tasks));
+        return view('pages.dashboard');
     }
 
     protected function handleToken (){

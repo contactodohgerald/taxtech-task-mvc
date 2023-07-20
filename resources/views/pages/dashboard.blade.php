@@ -32,11 +32,11 @@
                                         <option value="low">Low</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-lg-9 text-start">
+                                <div class="form-group col-lg-12 text-start">
                                     <x-label for="description" :value="__('Description')" />
                                     <textarea id="description" class="form-control" name="description" :value="old('description')" required></textarea>
                                 </div>
-                                <div class="col-lg-3 text-center mt-4">
+                                <div class="text-center mt-4">
                                     <input type="checkbox" name="reminder" value="reminder" id="reminder">
                                     <label for="reminder">Set Reminder</label>
                                     <x-button class="ml-4 book-a-table-btn">
@@ -47,59 +47,12 @@
                         </div>
                     </div>
                     <hr>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        @forelse ($tasks->data as $data_item)
-                            <div class="col-12 col-md-6">
-                                <div class="card shadow">
-                                   <div class="card-body">
-                                    <h2> <a href="{{ route('todo.tasks.show', $data_item->_id) }}">  {{ ucfirst($data_item->name) }} </a></h2>
-                                    <div>
-                                         <b>
-                                             <span class="text-danger">Due Date:</span>
-                                             {{ \Carbon\Carbon::parse($data_item->due_date)->format('jS F Y') }}
-                                         </b>   
-                                         /   
-                                         <b>
-                                             <span class="text-danger">Priority:</span>
-                                             {{ ucfirst($data_item->priority) }}
-                                         </b>
-                                     </div>
-                                    
-                                     <div class="d-flex justify-content-between align-items-center">
-                                         <span class="card-text">
-                                             <span class="bx bx-calendar-event"></span>
-                                             <span class="small">
-                                                 Created
-                                                 {{ \Carbon\Carbon::parse($data_item->createdAt)->format('jS F Y') }}
-                                             </span>
-                                         </span>    
-                                         <div class="btn-group flex gap-2">
-                                             <a title="Edit" class="btn btn-secondary btn-icon dropdown-item inline-block" href="{{route('todo.tasks.edit', $data_item->_id) }}">
-                                                 <i class="bx bxs-edit text-warning" style="opacity:80%"></i>
-                                             </a>
-                                             <form method="POST" action="{{route('todo.tasks.destroy', $data_item->_id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button title="Delete" class="btn btn-secondary btn-icon dropdown-item inline-block">
-                                                    <i class="bx bxs-trash-alt text-danger" style="opacity:80%"></i>
-                                                </button>
-                                             </form>
-                                         </div>
-                                     </div>
-                                 </div>
-                                </div>
-                            </div>
-                        @empty
-                            <div class="col-lg-12">
-                                <p>You have no tasks available at the moment. Try adding some!</p>
-                            </div>
-                        @endforelse
+                    <div class="mt-3 left">
+                        <a href="{{  route('todo.tasks.index') }}" class="ml-4 book-a-table-btn">
+                            {{ __('View All Task') }}
+                        </a>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>

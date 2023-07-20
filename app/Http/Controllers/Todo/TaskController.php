@@ -18,7 +18,12 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks =  Http::withHeaders([
+            'Authorization' => 'Bearer ' . auth()->user()->token,
+        ])->get(env('API_BASE_URL').'/task-get/'.auth()->user()->uuid);
+
+        return view('pages.view-task')
+            ->with('tasks', json_decode($tasks));
     }
 
     /**
