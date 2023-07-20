@@ -25,7 +25,7 @@ class Controller extends BaseController
     {
         $tasks =  Http::withHeaders([
             'Authorization' => 'Bearer ' . auth()->user()->token,
-        ])->get(env('API_BASE_URL').'/task-get/'.auth()->user()->id);
+        ])->get(env('API_BASE_URL').'/task-get/'.auth()->user()->uuid);
 
         return view('pages.dashboard')
             ->with('tasks', json_decode($tasks));
@@ -35,7 +35,7 @@ class Controller extends BaseController
         $user = User::find(Auth::user()->id);
 
         $payload = [
-            'uuid' => $user->id,
+            'uuid' => $user->uuid,
             'username' => $user->username,
             'email' => $user->email
         ];

@@ -57,7 +57,7 @@ class TaskController extends Controller
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . auth()->user()->token,
-        ])->post(env('API_BASE_URL').'/task-create/'.auth()->user()->id, $input);
+        ])->post(env('API_BASE_URL').'/task-create/'.auth()->user()->uuid, $input);
       
         if(!$response['status'])
             return redirect()->back()->with('error', 'An error occured, try again later');
